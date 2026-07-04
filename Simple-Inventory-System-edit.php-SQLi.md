@@ -85,6 +85,4 @@ Additionally:
 - https://owasp.org/www-community/attacks/SQL_Injection
 - https://cwe.mitre.org/data/definitions/89.html
 - https://code-projects.org/simple-inventory-system-in-php-with-source-code/
-```
 
----
