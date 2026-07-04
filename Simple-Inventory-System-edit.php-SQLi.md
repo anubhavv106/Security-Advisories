@@ -9,16 +9,16 @@
 | **Vendor** | https://code-projects.org/simple-inventory-system-in-php-with-source-code/ |
 | **Vulnerable File** | `/InventoryManagement/edit.php` |
 | **Vulnerable Parameter** | `id` (POST) |
-| **Authentication Required** | Yes (User login) |
+| **Authentication Required** | No |
 | **Attack Vector** | Remote |
 | **Vulnerability Type** | Boolean-based Blind + Time-based Blind SQL Injection |
 | **CWE** | CWE-89 |
-| **CVSS v3.1 Score** | 6.5 (Medium) |
-| **CVSS v3.1 Vector** | AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N |
+| **CVSS v3.1 Score** | 7.5 (High) |
+| **CVSS v3.1 Vector** | AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N |
 
 ## Description
 
-A SQL Injection vulnerability was found in Simple Inventory System 1.0 on code-projects.org. The affected file is `/InventoryManagement/edit.php`. The manipulation of the POST parameter `id` with a crafted payload leads to SQL Injection (Boolean-based Blind and Time-based Blind). The application directly concatenates user input into backend SQL queries without sanitization or parameterized queries. The attack can be initiated remotely. Authentication is required. Arbitrary file read via FILE privilege was confirmed.
+A SQL Injection vulnerability was found in Simple Inventory System 1.0 on code-projects.org. The affected file is `/InventoryManagement/edit.php`. The manipulation of the POST parameter `id` with a crafted payload leads to SQL Injection (Boolean-based Blind and Time-based Blind). The application directly concatenates user input into backend SQL queries without sanitization or parameterized queries. The attack can be initiated remotely without authentication. Arbitrary file read via FILE privilege was confirmed.
 
 ## Proof of Concept
 
@@ -27,7 +27,6 @@ A SQL Injection vulnerability was found in Simple Inventory System 1.0 on code-p
 POST /InventoryManagement/edit.php HTTP/1.1
 Host: TARGET
 Content-Type: application/x-www-form-urlencoded
-Cookie: PHPSESSID=XXXXXXXXXXXXXXXXXXXXXXXX
 
 id=1&price=1&product_name=test&quantity=1&submit=Edit+Records
 ```
@@ -62,7 +61,7 @@ daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
 
 ## Impact
 
-An authenticated remote attacker can:
+An unauthenticated remote attacker can:
 - Enumerate the entire backend database
 - Extract user credentials and sensitive data
 - Read arbitrary files from the server via FILE privilege
